@@ -96,7 +96,7 @@ export default function Hero() {
           highlights={site.headlineHighlights}
           immediate
           delay={0.1}
-          className="text-balance max-w-5xl font-display text-[2.35rem] font-bold leading-[1.04] tracking-tight sm:text-6xl md:text-7xl"
+          className="text-balance max-w-5xl font-display text-[2.35rem] font-medium leading-[1.04] tracking-tight sm:text-6xl md:text-7xl"
         />
 
         <motion.p
