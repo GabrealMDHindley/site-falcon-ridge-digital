@@ -40,7 +40,7 @@ data-sovereignty, "engines" not "campaigns". This page sharpens it into one scro
 | `accent-deep` | `#19AB98` | logo teal. Eyebrows, rails, wireframe |
 | `ink` / `ink-dim` | `#F3FBF9` / `#A3C3C9` | their pale-mint light, plus a dimmed mint for body text on navy |
 | `mint` | `#E8F7FF` | their light section bg (CSS 48 uses). Particle highlights |
-| `coral` | `#F1615A` | their accent (CSS 42 uses). Used sparingly: the "Middleman Tax" eyebrow and the strike line through price anchors |
+| `coral` | `#F1615A` | their accent (CSS 42 uses). Used sparingly: the "Middleman Tax" eyebrow |
 | blue | `#1481B5` | their link blue. A secondary aurora blob and gyro ring |
 
 ## 4. Typography
@@ -48,8 +48,8 @@ data-sovereignty, "engines" not "campaigns". This page sharpens it into one scro
 - **Outfit**: display + UI (their primary, 68 `font-family` rules on their site).
   Headlines move from TAS's uppercase Space Grotesk to Outfit bold in sentence/title
   case, matching their hero.
-- **Sen**: takes TAS's mono slot for eyebrows, stat labels, button text and price
-  labels (their label/button font). The eyebrow *treatment* (tiny, uppercase, wide
+- **Sen**: takes TAS's mono slot for eyebrows, stat labels, button text and
+  form labels (their label/button font). The eyebrow *treatment* (tiny, uppercase, wide
   tracking, tracking-in animation) is unchanged. Only the face is now theirs.
 - **DM Sans**: long body copy (their tertiary).
 
@@ -106,20 +106,17 @@ mark rises in above it.
 | /book page | `#book` section on the page (3 modes) | — |
 | /confirmation | `/confirmation`, cookie-gated, confirmation-video slot | — |
 
-## 9. Offers display rules (from offers.md, all honored)
+## 9. Offers display rules
 
-- Anchors are struck through exactly as given (`$197`→`$97`, `$1,000`→`$497`,
-  `$500/m`→`$297/m`, `$1,000`→`$500`, consulting anchors).
-- One Full Stack tier at `$7,000/m - $10,000/m`, **no anchor**.
-- Course: "Price coming soon". `$147` is never printed.
-- Website + CRM offer: both figures shown, each with its own anchor, labeled with the
-  sheet's own field names ("Monthly", "One Time"). No "plus/or/setup" wording.
-- Consulting tiers say "N Services" only. No modules are picked.
+- **No pricing anywhere on the site** (user instruction, 2026-10-13). That means no
+  prices, anchors, units, per-property notes, ad-spend percentages or "price coming
+  soon". Prices stay in the studio's `offers.md` only, and the call is where pricing
+  is discussed.
+- Offer names and inclusions are verbatim from offers.md. Consulting tiers say
+  "N Services" only. No modules are picked.
 - Workshop-replay CTAs → the URL the user gave
-  (`/plug-the-leaks-blueprint-rv-park/`) and fire `offer_checkout_click`. Everything
-  else → `#book`.
-- Full-service tab footnote: "All full-service retainers are / property / mo." (the
-  sheet's note). Email/SMS and CRO show their own units exactly as written.
+  (`/plug-the-leaks-blueprint-rv-park/`) and fire `offer_checkout_click` (no value).
+  Everything else → `#book`.
 
 ## 10. CTAs & integrations
 
@@ -135,22 +132,20 @@ mark rises in above it.
 ## 11. Anti-goals
 
 No Train & Scale copy, logo or video. No invented guarantee, testimonials, results or
-client names. No stock photography. No prices outside offers.md. No redrawn or
+client names. No stock photography. No pricing on the site at all. No redrawn or
 recolored logo. No tracking traffic into the client's accounts without approval.
 
 ## Open questions (needs the user)
 
-1. **Full Stack consulting anchor** ($6,000/m sits below the $7,000/m - $10,000/m price,
-   and the block was pasted twice). Shown as one tier with no anchor. What's the
-   intended anchor?
-2. **Conversion Launchpad Course price**: shown as "Price coming soon". Confirm the
-   price (the sheet says ~$147, which is not printed).
+1. **Pricing removed (2026-10-13).** The offer-sheet questions on the Full Stack anchor,
+   the course price (~$147), and how the Website + CRM figures combine only matter if
+   pricing goes back on the site. They're kept in offers.md.
+2. *(merged into 1)*
 3. **Workshop-replay URLs**: both point to the free "Plug The Leaks" Blueprint page,
    while the workshop's sales page is `/conversion-launchpad-rv/`. That page sells the
-   *live* workshop at $97 / $497 with no anchor price, and calls the $497 tier
+   *live* workshop and calls the coaching tier
    "Conversion Accelerator". Confirm the checkout URL and naming for the replay offers.
-4. **Website + CRM + SMS + Email**: is the $500 one-time a setup fee on top of $297/m,
-   or a pay-in-full alternative? Both figures are shown with no connecting word.
+4. *(merged into 1)*
 5. **"Free" strategy call**: the CTA copy relies on their home page line ("Best of all,
    the audit is completely free!"). Confirm the call itself is free.
 6. **Testimonials**: two quotes on `/conversion-launchpad-rv/` (Maria Stephens, Digital
@@ -158,8 +153,8 @@ recolored logo. No tracking traffic into the client's accounts without approval.
    real clients. The same page has leftover template text, so they're hidden
    (`SHOW_TESTIMONIALS = false`). Confirm they're real and approved, and they can be
    added. `/insights/case-studies/` is empty.
-7. **Software naming**: their `/services/seo/` page calls the $249 tool "Visibility
-   Engine". The offer sheet calls it "Local Listing Manager". The sheet's name is used.
+7. **Software naming**: their `/services/seo/` page calls the local-listings tool
+   "Visibility Engine". The offer sheet calls it "Local Listing Manager". The sheet's name is used.
 8. **Booking timezone**: assumed Mountain Time (Utah 801 number). The workshop page
    uses Central Time. Confirm.
 9. **Credentials**: GHL API key / location / calendar IDs, webhook URLs (GHL, email

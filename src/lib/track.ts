@@ -12,7 +12,7 @@ export type TrackParams = {
   location?: string;
   /** Offer name for checkout clicks. */
   offer?: string;
-  /** Numeric value in USD, when one is known (checkout clicks). */
+  /** Optional numeric value in USD (none is sent while the site shows no pricing). */
   value?: number;
   path?: string;
   [key: string]: string | number | boolean | undefined;
@@ -116,10 +116,4 @@ export function track(event: TrackEvent, params: TrackParams = {}): void {
     // Tracking must never break the page.
     console.warn("track() failed", err);
   }
-}
-
-/** "$1,499 + 15% ..." → 1499; "$297/m" → 297. Undefined when there's no leading dollar figure. */
-export function priceValue(amount: string): number | undefined {
-  const m = amount.match(/\$([\d,]+(?:\.\d+)?)/);
-  return m ? Number(m[1].replace(/,/g, "")) : undefined;
 }

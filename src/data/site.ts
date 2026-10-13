@@ -251,21 +251,10 @@ export const serviceTags = [
 ];
 
 // ---------------------------------------------------------------------------
-// OFFERS — verbatim from offers.md. Display rules honored here:
-//  • anchors shown struck through exactly as given;
-//  • ONE Full Stack consulting tier at "$7,000/m - $10,000/m" with NO anchor;
-//  • course price pending → "Price coming soon", never a number;
-//  • Website + CRM offer shows both figures with their own anchors and no
-//    wording that asserts how they combine.
+// OFFERS — names and inclusions verbatim from offers.md. Per the user
+// (2026-10-13): NO pricing anywhere on the site — no prices, anchors, units
+// or "price coming soon". Prices stay in offers.md only.
 // ---------------------------------------------------------------------------
-
-export type Price = {
-  /** Field label from the offer sheet, e.g. "One Time". Optional. */
-  label?: string;
-  amount: string;
-  anchor?: string;
-  unit?: string;
-};
 
 export type OfferCta =
   | { kind: "checkout"; label: string; href: string }
@@ -275,8 +264,6 @@ export type Offer = {
   id: string;
   name: string;
   note?: string;
-  prices: Price[];
-  pricePending?: string;
   includes: string[];
   cta?: OfferCta;
   featured?: boolean;
@@ -289,7 +276,6 @@ export type ServiceLevel = {
   label: string;
   title: string;
   blurb?: string;
-  footnote?: string;
   groups: OfferGroup[];
 };
 
@@ -308,14 +294,12 @@ export const serviceLevels: ServiceLevel[] = [
           {
             id: "replay",
             name: "Conversion Launchpad Workshop Replay",
-            prices: [{ label: "One Time", amount: "$97", anchor: "$197" }],
             includes: ["Access to workshop recording"],
             cta: { kind: "checkout", label: "Get The Replay", href: WORKSHOP_URL },
           },
           {
             id: "replay-consulting",
             name: "Conversion Launchpad Workshop Replay + 1-1 Consulting",
-            prices: [{ label: "One Time", amount: "$497", anchor: "$1,000" }],
             includes: [
               "Access to workshop recording",
               "Access To The Program When Its Finished",
@@ -328,9 +312,8 @@ export const serviceLevels: ServiceLevel[] = [
             id: "course",
             name: "Conversion Launchpad Course",
             note: "Replay + resources + all future lessons",
-            prices: [],
-            pricePending: "Price coming soon",
             includes: [],
+            cta: { kind: "book" },
           },
         ],
       },
@@ -348,14 +331,12 @@ export const serviceLevels: ServiceLevel[] = [
           {
             id: "reporting",
             name: "Reporting Dashboard",
-            prices: [{ amount: "$99", unit: "/ property / mo." }],
             includes: [],
             cta: { kind: "book" },
           },
           {
             id: "listings",
             name: "Local Listing Manager",
-            prices: [{ amount: "$249", unit: "/ property / mo." }],
             includes: [],
             cta: { kind: "book" },
           },
@@ -363,7 +344,6 @@ export const serviceLevels: ServiceLevel[] = [
             id: "conversion-stack",
             name: "Conversion Stack",
             note: "GHL sub-account",
-            prices: [{ amount: "$499", unit: "/ property / mo." }],
             includes: [],
             cta: { kind: "book" },
           },
@@ -371,7 +351,6 @@ export const serviceLevels: ServiceLevel[] = [
             id: "intelligence-suite",
             name: "Marketing Intelligence Suite",
             note: "Reporting + local listings + GHL bundle",
-            prices: [{ amount: "$749", unit: "/ property / mo." }],
             includes: [],
             cta: { kind: "book" },
             featured: true,
@@ -391,10 +370,6 @@ export const serviceLevels: ServiceLevel[] = [
           {
             id: "website-crm",
             name: "Website + CRM + SMS Automations + Email Automations",
-            prices: [
-              { label: "Monthly", amount: "$297/m", anchor: "$500/m" },
-              { label: "One Time", amount: "$500", anchor: "$1,000" },
-            ],
             includes: [
               "Conversion Tracking / Data",
               "Website",
@@ -421,35 +396,30 @@ export const serviceLevels: ServiceLevel[] = [
           {
             id: "consulting-2",
             name: "2 Services",
-            prices: [{ label: "Monthly", amount: "$1,500/m", anchor: "$2,500/m" }],
             includes: ["1-1 Consulting Calls", "2 Services"],
             cta: { kind: "book" },
           },
           {
             id: "consulting-4",
             name: "4 Services",
-            prices: [{ label: "Monthly", amount: "$3,000/m", anchor: "$4,500/m" }],
             includes: ["1-1 Consulting Calls", "4 Services"],
             cta: { kind: "book" },
           },
           {
             id: "consulting-6",
             name: "6 Services",
-            prices: [{ label: "Monthly", amount: "$4,500/m", anchor: "$6,000/m" }],
             includes: ["1-1 Consulting Calls", "6 Services"],
             cta: { kind: "book" },
           },
           {
             id: "consulting-8",
             name: "8 Services",
-            prices: [{ label: "Monthly", amount: "$5,500/m", anchor: "$7,500/m" }],
             includes: ["1-1 Consulting Calls", "8 Services"],
             cta: { kind: "book" },
           },
           {
             id: "consulting-full-stack",
             name: "14 Services (Full Stack)",
-            prices: [{ label: "Monthly", amount: "$7,000/m - $10,000/m" }],
             includes: ["1-1 Consulting Calls", "14 Services (Full Stack)"],
             cta: { kind: "book" },
             featured: true,
@@ -462,30 +432,26 @@ export const serviceLevels: ServiceLevel[] = [
     id: "full-service",
     label: "Full-Service Retainer",
     title: "Full service retainer",
-    footnote: "All full-service retainers are / property / mo.",
     groups: [
       {
         title: "SEO",
         offers: [
-          { id: "seo-technical", name: "Technical", prices: [{ amount: "$999" }], includes: [], cta: { kind: "book" } },
+          { id: "seo-technical", name: "Technical", includes: [], cta: { kind: "book" } },
           {
             id: "seo-local",
             name: "Local",
-            prices: [{ amount: "$999" }],
             includes: ["Active management of all major local listing platforms - e.g. Google Maps, Apple Maps, etc."],
             cta: { kind: "book" },
           },
           {
             id: "seo-content",
             name: "Content",
-            prices: [{ amount: "$999" }],
             includes: ["Provides 2 elite content pieces"],
             cta: { kind: "book" },
           },
           {
             id: "seo-video",
             name: "Video",
-            prices: [{ amount: "$999" }],
             includes: [
               "Provides 3 elite video optimizations",
               "Note: this is optimizing videos on marketing platforms, not creating or editing the videos themselves",
@@ -497,9 +463,9 @@ export const serviceLevels: ServiceLevel[] = [
       {
         title: "Paid Ads",
         offers: [
-          { id: "ads-1", name: "1 platform", prices: [{ amount: "$1,499 + 15% ad spend management" }], includes: [], cta: { kind: "book" } },
-          { id: "ads-2", name: "2 platform", prices: [{ amount: "$2,499 + 15% ad spend management" }], includes: [], cta: { kind: "book" } },
-          { id: "ads-3", name: "3 platform", prices: [{ amount: "$2,999 + 15% ad spend management" }], includes: [], cta: { kind: "book" } },
+          { id: "ads-1", name: "1 platform", includes: [], cta: { kind: "book" } },
+          { id: "ads-2", name: "2 platform", includes: [], cta: { kind: "book" } },
+          { id: "ads-3", name: "3 platform", includes: [], cta: { kind: "book" } },
         ],
       },
       {
@@ -508,8 +474,7 @@ export const serviceLevels: ServiceLevel[] = [
           {
             id: "email-sms",
             name: "Email / SMS Marketing",
-            prices: [{ amount: "$499", unit: "/ campaign bundle" }],
-            includes: ["A campaign bundle = 1 email + 1 SMS"],
+            includes: [],
             cta: { kind: "book" },
           },
         ],
@@ -520,7 +485,6 @@ export const serviceLevels: ServiceLevel[] = [
           {
             id: "cro",
             name: "Conversion Rate Optimization",
-            prices: [{ amount: "$999", unit: "/ funnel test / mo." }],
             includes: [],
             cta: { kind: "book" },
           },

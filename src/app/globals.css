@@ -306,13 +306,6 @@ html.custom-cursor-active button {
   color: var(--color-accent);
 }
 
-/* Struck-through price anchors, exactly as the offer sheet gives them. */
-.price-anchor {
-  text-decoration: line-through;
-  text-decoration-thickness: 1.5px;
-  text-decoration-color: rgba(241, 97, 90, 0.85);
-}
-
 details.faq > summary {
   list-style: none;
   cursor: pointer;

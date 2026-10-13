@@ -7,8 +7,7 @@ import Eyebrow from "./Eyebrow";
 import { Stagger, StaggerItem } from "./Stagger";
 import Tilt from "./Tilt";
 import TrackedLink from "./TrackedLink";
-import { priceValue } from "@/lib/track";
-import { CTA_LABEL, serviceLevels, type Offer, type Price } from "@/data/site";
+import { CTA_LABEL, serviceLevels, type Offer } from "@/data/site";
 
 function CheckIcon() {
   return (
@@ -16,34 +15,6 @@ function CheckIcon() {
       <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.2" opacity="0.4" />
       <path d="M5 8.3l2 2 4-4.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
-  );
-}
-
-function PriceRow({ price }: { price: Price }) {
-  const long = price.amount.length > 12;
-  return (
-    <div>
-      {price.label && (
-        <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-ink-dim">{price.label}</p>
-      )}
-      <p className="mt-1 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-        {price.anchor && (
-          <span className="price-anchor font-display text-lg text-ink-dim">
-            <span className="sr-only">Regular price </span>
-            {price.anchor}
-          </span>
-        )}
-        <span
-          className={`glow-text font-display font-bold text-ink ${
-            long ? "text-xl leading-snug sm:text-2xl" : "text-4xl"
-          }`}
-        >
-          {price.anchor && <span className="sr-only">Now </span>}
-          {price.amount}
-        </span>
-        {price.unit && <span className="text-sm text-ink-dim">{price.unit}</span>}
-      </p>
-    </div>
   );
 }
 
@@ -63,17 +34,8 @@ function OfferCard({ offer, level, group }: { offer: Offer; level: string; group
       </h3>
       {offer.note && <p className="mt-1 text-sm text-ink-dim">{offer.note}</p>}
 
-      <div className="mt-5 space-y-4">
-        {offer.prices.map((p) => (
-          <PriceRow key={(p.label ?? "") + p.amount} price={p} />
-        ))}
-        {offer.pricePending && (
-          <p className="font-display text-2xl font-semibold text-ink-dim">{offer.pricePending}</p>
-        )}
-      </div>
-
       {offer.includes.length > 0 && (
-        <ul className="mt-6 space-y-2.5">
+        <ul className="mt-5 space-y-2.5">
           {offer.includes.map((item) => (
             <li key={item} className="flex gap-2.5 font-body text-sm leading-relaxed text-ink-dim">
               <CheckIcon />
@@ -88,11 +50,7 @@ function OfferCard({ offer, level, group }: { offer: Offer; level: string; group
           <TrackedLink
             href={offer.cta.href}
             event="offer_checkout_click"
-            params={{
-              location: `offers:${offer.id}`,
-              offer: offer.name,
-              value: priceValue(offer.prices[0]?.amount ?? ""),
-            }}
+            params={{ location: `offers:${offer.id}`, offer: offer.name }}
             className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-sm font-bold uppercase tracking-wide text-ground transition hover:bg-white"
           >
             {offer.cta.label}
@@ -118,7 +76,8 @@ function OfferCard({ offer, level, group }: { offer: Offer; level: string; group
 }
 
 // The four service levels from the client's offer sheet, as the TAS-style
-// tab switcher. Every price, name and inclusion is verbatim from offers.md.
+// tab switcher. Names and inclusions are verbatim from offers.md; no pricing
+// is shown anywhere on the site (user instruction, 2026-10-13).
 export default function Offers() {
   const [activeId, setActiveId] = useState(serviceLevels[0].id);
   const active = serviceLevels.find((l) => l.id === activeId) ?? serviceLevels[0];
@@ -128,7 +87,7 @@ export default function Offers() {
     <section id="offers" className="scroll-mt-24 border-t border-white/5 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
-          eyebrow="Offers & Pricing"
+          eyebrow="Offers"
           title="Pick your service level, see exactly what's included"
           description="From a do-it-yourself workshop to a full-service retainer — deploy any module, in any order, based on your current P&L needs."
         />
@@ -196,11 +155,6 @@ export default function Offers() {
               })}
             </div>
 
-            {active.footnote && (
-              <p className="mt-8 text-center font-mono text-xs uppercase tracking-[0.2em] text-ink-dim">
-                {active.footnote}
-              </p>
-            )}
           </motion.div>
         </AnimatePresence>
       </div>

@@ -34,7 +34,7 @@ npm run build
 
 `/`: Preloader → Hero → VSL (hidden until a Vimeo ID is set) → module marquee →
 "Engineered by Experience" stats → Middleman-tax thesis → Assets We Optimize →
-**Offers & Pricing** (`#offers`, 5 tabs) → How It Works timeline (`#how-it-works`) →
+**Offers** (`#offers`, 5 tabs, no pricing) → How It Works timeline (`#how-it-works`) →
 What We Deploy modules (`#modules`) → Why Work With Us (`#why`) → FAQs (`#faqs`) →
 final CTA → booking (`#book`) → footer.
 
@@ -47,8 +47,9 @@ Other routes: `/confirmation` (post-booking, `noindex`, cookie-gated) · `/api/b
 All copy comes from falconridgedigital.com (home, /strategy-proposal/,
 /conversion-launchpad-rv/, /fundamentals/middleman-tax/, services pages), fetched
 2026-10-12/13, plus the offer sheet the client supplied (studio record
-`clients/falcon-ridge-digital/offers.md`). Prices live in `src/data/site.ts` →
-`serviceLevels` and must match the offer sheet character for character. There is no
+`clients/falcon-ridge-digital/offers.md`). Offer names/inclusions live in `src/data/site.ts` →
+`serviceLevels`. **No pricing is shown anywhere on the site** (user instruction,
+2026-10-13); prices stay in the offer sheet only. There is no
 guarantee and there are no testimonials (see open questions).
 
 ## Booking: three modes, never a dead button
@@ -84,7 +85,7 @@ configured platform. A platform with no ID loads no script and gets no events.
 | `cta_click` | any "Book Your Strategy Call" / "Discuss the Module" click | `cta_click` | none | `cta_click` | custom `CTAClick` | `cta_click` |
 | `lead` | booking or lead form submitted OK | `generate_lead` | conversion w/ lead label | `submit_lead_form` | `Lead` | `lead` |
 | `booked` | `/confirmation` renders (cookie-gated) | `book_appointment` | conversion w/ booked label | `book_appointment` | `Schedule` | `booked` |
-| `offer_checkout_click` | workshop-replay "Get The Replay…" buttons | `begin_checkout` (+value) | conversion w/ checkout label | `begin_checkout` (+revenue) | `InitiateCheckout` (+value) | `offer_checkout_click` |
+| `offer_checkout_click` | workshop-replay "Get The Replay…" buttons | `begin_checkout` | conversion w/ checkout label | `begin_checkout` | `InitiateCheckout` | `offer_checkout_click` |
 
 Server side, `/api/book` (on a successful booking) and `/api/lead` POST a JSON payload
 (`event`, contact fields, qualifiers, `startTime`, `source`, `site`, `at`) to each
@@ -127,9 +128,7 @@ also fire the same tags inside GTM, or every event will count twice.
 
 ## Open questions / needs the user
 
-See `docs/design-brief.md` → "Open questions". The short version: confirm the Full
-Stack anchor, the course price, the workshop-replay URLs, how the Website + CRM
-figures combine, and the "free" call. Supply GHL / webhook / tracking credentials and
+See `docs/design-brief.md` → "Open questions". The short version: confirm the workshop-replay URL and the "free" call. Supply GHL / webhook / tracking credentials and
 the VSL and confirmation video Vimeo IDs.
 
 Media rights: the logo and all copy come from falconridgedigital.com. The client
